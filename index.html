@@ -745,6 +745,7 @@ h1{
   display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:12px;
   border-top:1px dashed rgba(255,255,255,0.14);
 }
+.cat-restart{width:100%;margin-top:12px}
 /* 背包 / 成长经历 工具条（理智下方） */
 .cat-tools{display:flex;gap:8px;margin:12px 0 2px}
 .cat-tool{
@@ -1135,9 +1136,7 @@ footer{
     </section>
   </main>
 
-  <div class="fate-actions" style="margin-top:26px">
-    <button class="btn-ghost" id="restart">重新开始</button>
-  </div>
+  <div class="fate-actions" style="margin-top:26px"></div>
 
   <footer>非商业粉丝向作品 · 背景设定源自《诡秘之主》（爱潜水的乌贼）· 仅供同好娱乐</footer>
 </div>
@@ -1180,6 +1179,7 @@ footer{
       <input type="range" id="volSlider" min="0" max="100" value="50" step="1" aria-label="音量">
       <span class="vol-label" id="volLabel">50%</span>
     </div>
+    <button class="btn-ghost cat-restart" id="catRestart">重新开始</button>
   </div>
 </div>
 
@@ -8342,7 +8342,10 @@ $('spin2').addEventListener('click', function(){
   spin2Flow();
 });
 $('spin3').addEventListener('click', spinStageFlow);
-$('restart').addEventListener('click', resetAll);
+$('catRestart').addEventListener('click', function(){
+  $('catModal').classList.remove('open');
+  resetAll();
+});
 $('catBtn').addEventListener('click', function(){
   $('catModal').classList.add('open');
   renderModal();
