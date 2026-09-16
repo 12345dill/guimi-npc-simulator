@@ -146,6 +146,13 @@ button{font-family:var(--sans);cursor:pointer;border:none;background:none;color:
   display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;
   background:rgba(18,26,52,0.72);border:1px solid rgba(120,150,220,0.14);
 }
+@media (max-width:600px){
+  .shop-row{ flex-wrap:wrap;row-gap:6px }
+  .shop-row .s-name{ flex:1 1 100%;white-space:normal;word-break:break-word;letter-spacing:.04em }
+  .shop-row .s-desc{ flex:1 1 100%;order:3 }
+  .shop-row .s-cost{ margin-left:auto }
+  .shop-row .s-buy{ margin-left:auto }
+}
 .shop-row .s-name{font-family:var(--serif);font-size:14px;color:#f2e2c4;letter-spacing:.08em;flex:none}
 .shop-row .s-desc{font-size:11px;color:var(--dim);flex:1;line-height:1.5}
 .shop-row .s-cost{
@@ -954,7 +961,7 @@ footer{
   <div class="cat-box">
     <button class="cat-btn" id="catBtn" aria-label="打开猫先生的状态面板">
       <span class="cat-badge">
-        <img id="catImg" src="images/cat.png" alt="戴礼帽的神秘黑猫">
+        <img id="catImg" src="images/cat.jpg" alt="戴礼帽的神秘黑猫">
         <span class="cat-svg-fallback" id="catFallback"></span>
         <span class="cat-dot" id="catDot"></span>
       </span>
@@ -1161,7 +1168,7 @@ footer{
   <div class="modal-card" role="dialog" aria-modal="true" aria-label="猫先生的状态面板">
     <button class="modal-close" id="closeModal" aria-label="关闭">×</button>
     <div class="modal-head">
-      <div class="modal-cat"><img id="catImgModal" src="images/cat.png" alt=""></div>
+      <div class="modal-cat"><img id="catImgModal" src="images/cat.jpg" alt=""></div>
       <div>
         <h3>猫先生 · 命运记录</h3>
         <p id="modalSub">灰雾之上的观测者，黑猫，戴礼帽。</p>
@@ -1415,24 +1422,24 @@ const PATHWAYS = [
 
 /* 神名试炼：输入真神或天使之名，触发理智对抗（连续四次 30%，失败即终结）。真神序列0、天使序列1，成功属性+5 */
 const NAME_GODS = [
-  { name:'奇克',     path9:'魔女',    seq:6, god:'原初魔女',   attr:'beauty',      hint:'灾难与诅咒之母 · 魔女途径真神', img:'images/god_qike.png', hiddenName:'奇娅' },
-  { name:'亚当',     path9:'观众',    seq:6, god:'空想家',     attr:'wisdom',      hint:'编织梦境与历史的心理巨擘 · 观众途径真神', img:'images/god_adam.png', hiddenName:'亚瑟' },
-  { name:'阿蒙',     path9:'偷盗者',  seq:6, god:'错误',       attr:'luck',        hint:'偷窃命运与时间的诡秘者 · 偷盗者途径真神', img:'images/god_amon.png', hiddenName:'阿伦' },
-  { name:'列奥德罗',  path9:'水手',   seq:6, god:'暴君',       attr:'constitution',hint:'风暴与雷霆的化身 · 水手途径真神', img:'images/god_leodero.png', hiddenName:'列昂' },
-  { name:'克莱恩',   path9:'占卜家',  seq:9, trial:1, god:'愚者',       attr:'mystery',     hint:'灰雾之上的神秘主宰 · 祂只看了你一眼', img:'images/god_klein.png', hiddenName:'克莱', aliases:['愚者','灰雾之上的神秘主宰'] },
-  { name:'周明瑞',   path9:'占卜家',  seq:9, trial:1, god:'愚者',       attr:'mystery',     hint:'灰雾之上的神秘主宰 · 祂的旧名，同样宽容', img:'images/god_zhou.png', hiddenName:'周明' },
-  { name:'真实造物主', path9:'歌颂者', seq:6, god:'真实造物主', attr:'faith',       hint:'远古太阳神的堕落之面 · 太阳途径真神', img:'images/god_truecreator.png', hiddenName:'造物', aliases:['造物主','堕落太阳神'] },
-  { name:'欲望母树',  path9:'秘祈人',  seq:6, god:'欲望母树',   attr:'mystery',     hint:'缠绕万物的根须 · 玫瑰学派背后的真神', img:'images/god_mother.png', hiddenName:'母树' },
-  { name:'原始月亮',  path9:'月亮',    seq:6, god:'原始月亮',   attr:'beauty',      hint:'苍白之月 · 血族与月亮途径敬畏的疯狂存在', img:'images/god_moon.png', hiddenName:'月酿' },
-  { name:'黄涛',     path9:'阅读者',  seq:6, god:'博学者',     attr:'wisdom',      hint:'罗塞尔大帝的本名 · 通识者途径序列1 博学者', img:'images/god_huangtao.png', hiddenName:'黄瀚' },
-  { name:'乌洛琉斯',  path9:'占卜家',  seq:6, god:'命运之蛇',   attr:'luck',        hint:'执掌命运纺线的巨蛇 · 愚者途径天使', img:'images/god_wuliu.png', hiddenName:'琉娜' },
-  { name:'威尔',     path9:'占卜家',  seq:6, god:'命运之蛇',   attr:'luck',        hint:'以孩童之身行走的命运之蛇 · 愚者途径天使', img:'images/god_will.png', hiddenName:'威恩' },
-  { name:'门先生',   path9:'学徒',    seq:6, god:'星界之门',   attr:'mystery',     hint:'被囚于罗塞尔日记中的存在 · 门途径天使', img:'images/god_door.png', hiddenName:'门扉' },
-  { name:'阿曼妮西斯', path9:'不眠者', seq:8, god:'黑夜女神',   attr:'mystery',     trial:2, mercy:true, hint:'仁慈的隐秘存在 · 黑夜途径真神，真名不可轻呼', img:'images/god_amanises.png', hiddenName:'曼妮', aliases:['黑夜女神','女神'] },
-  { name:'莉莉丝',   path9:'月亮',    seq:8, trial:2, god:'血族始祖',   attr:'beauty',      hint:'吸血鬼始祖 · 白发波浪卷的血之母，原始月亮的眷属', img:'images/god_lilith.png', hiddenName:'莉莉娜', aliases:['血族始祖'] },
-  { name:'永恒烈阳', path9:'歌颂者',  seq:6, god:'永恒烈阳',   attr:'faith',       hint:'高悬于天的烈阳 · 太阳途径真神，蒸汽与机械之神的光辉之敌', img:'images/god_lieyang.png', hiddenName:'烈阳', aliases:['太阳神','烈阳'] },
-  { name:'蒸汽与机械之神', path9:'阅读者', seq:6, god:'蒸汽与机械之神', attr:'wisdom', hint:'齿轮与汽笛的主宰 · 通识者途径真神', img:'images/god_huangtao.png', hiddenName:'齿轮之神', aliases:['蒸汽之神','机械之神','蒸汽教会的主'] },
-  { name:'远古太阳神', path9:'歌颂者', seq:6, god:'远古太阳神', attr:'faith',       hint:'最初太阳的旧主 · 全知全能的古神，白塔之上曾有祂的圣座', img:'images/god_yanggu.png', hiddenName:'古阳', aliases:['太阳神','全知全能者','白银城之主'] },
+  { name:'奇克',     path9:'魔女',    seq:6, god:'原初魔女',   attr:'beauty',      hint:'灾难与诅咒之母 · 魔女途径真神', img:'images/god_qike.jpg', hiddenName:'奇娅' },
+  { name:'亚当',     path9:'观众',    seq:6, god:'空想家',     attr:'wisdom',      hint:'编织梦境与历史的心理巨擘 · 观众途径真神', img:'images/god_adam.jpg', hiddenName:'亚瑟' },
+  { name:'阿蒙',     path9:'偷盗者',  seq:6, god:'错误',       attr:'luck',        hint:'偷窃命运与时间的诡秘者 · 偷盗者途径真神', img:'images/god_amon.jpg', hiddenName:'阿伦' },
+  { name:'列奥德罗',  path9:'水手',   seq:6, god:'暴君',       attr:'constitution',hint:'风暴与雷霆的化身 · 水手途径真神', img:'images/god_leodero.jpg', hiddenName:'列昂' },
+  { name:'克莱恩',   path9:'占卜家',  seq:9, trial:1, god:'愚者',       attr:'mystery',     hint:'灰雾之上的神秘主宰 · 祂只看了你一眼', img:'images/god_klein.jpg', hiddenName:'克莱', aliases:['愚者','灰雾之上的神秘主宰'] },
+  { name:'周明瑞',   path9:'占卜家',  seq:9, trial:1, god:'愚者',       attr:'mystery',     hint:'灰雾之上的神秘主宰 · 祂的旧名，同样宽容', img:'images/god_zhou.jpg', hiddenName:'周明' },
+  { name:'真实造物主', path9:'歌颂者', seq:6, god:'真实造物主', attr:'faith',       hint:'远古太阳神的堕落之面 · 太阳途径真神', img:'images/god_truecreator.jpg', hiddenName:'造物', aliases:['造物主','堕落太阳神'] },
+  { name:'欲望母树',  path9:'秘祈人',  seq:6, god:'欲望母树',   attr:'mystery',     hint:'缠绕万物的根须 · 玫瑰学派背后的真神', img:'images/god_mother.jpg', hiddenName:'母树' },
+  { name:'原始月亮',  path9:'月亮',    seq:6, god:'原始月亮',   attr:'beauty',      hint:'苍白之月 · 血族与月亮途径敬畏的疯狂存在', img:'images/god_moon.jpg', hiddenName:'月酿' },
+  { name:'黄涛',     path9:'阅读者',  seq:6, god:'博学者',     attr:'wisdom',      hint:'罗塞尔大帝的本名 · 通识者途径序列1 博学者', img:'images/god_huangtao.jpg', hiddenName:'黄瀚' },
+  { name:'乌洛琉斯',  path9:'占卜家',  seq:6, god:'命运之蛇',   attr:'luck',        hint:'执掌命运纺线的巨蛇 · 愚者途径天使', img:'images/god_wuliu.jpg', hiddenName:'琉娜' },
+  { name:'威尔',     path9:'占卜家',  seq:6, god:'命运之蛇',   attr:'luck',        hint:'以孩童之身行走的命运之蛇 · 愚者途径天使', img:'images/god_will.jpg', hiddenName:'威恩' },
+  { name:'门先生',   path9:'学徒',    seq:6, god:'星界之门',   attr:'mystery',     hint:'被囚于罗塞尔日记中的存在 · 门途径天使', img:'images/god_door.jpg', hiddenName:'门扉' },
+  { name:'阿曼妮西斯', path9:'不眠者', seq:8, god:'黑夜女神',   attr:'mystery',     trial:2, mercy:true, hint:'仁慈的隐秘存在 · 黑夜途径真神，真名不可轻呼', img:'images/god_amanises.jpg', hiddenName:'曼妮', aliases:['黑夜女神','女神'] },
+  { name:'莉莉丝',   path9:'月亮',    seq:8, trial:2, god:'血族始祖',   attr:'beauty',      hint:'吸血鬼始祖 · 白发波浪卷的血之母，原始月亮的眷属', img:'images/god_lilith.jpg', hiddenName:'莉莉娜', aliases:['血族始祖'] },
+  { name:'永恒烈阳', path9:'歌颂者',  seq:6, god:'永恒烈阳',   attr:'faith',       hint:'高悬于天的烈阳 · 太阳途径真神，蒸汽与机械之神的光辉之敌', img:'images/god_lieyang.jpg', hiddenName:'烈阳', aliases:['太阳神','烈阳'] },
+  { name:'蒸汽与机械之神', path9:'阅读者', seq:6, god:'蒸汽与机械之神', attr:'wisdom', hint:'齿轮与汽笛的主宰 · 通识者途径真神', img:'images/god_huangtao.jpg', hiddenName:'齿轮之神', aliases:['蒸汽之神','机械之神','蒸汽教会的主'] },
+  { name:'远古太阳神', path9:'歌颂者', seq:6, god:'远古太阳神', attr:'faith',       hint:'最初太阳的旧主 · 全知全能的古神，白塔之上曾有祂的圣座', img:'images/god_yanggu.jpg', hiddenName:'古阳', aliases:['太阳神','全知全能者','白银城之主'] },
 ];
 const POLLUTIONS = [
   { name:'知识保留 · 无污染', desc:'不知为何，你记得的一切都没有引起任何大人物的注意——或许，中文本身不具备非凡属性。', bonus:'记忆完好 · 先知', color:'#1f3a5f', mem:true, cap:0 },
@@ -4729,93 +4736,93 @@ function seqName(path, seq){ return (SEQ_NAMES[path] && SEQ_NAMES[path][seq]) ||
 
 const PURSUER_POOL = {
  9:{ m:[
-   {n:'亨伯特·格雷',p:'占卜家',o:'廷根市立图书馆管理员',lk:'灰发梳得一丝不苟，眼下常年带着书卷气，爱穿褪色的深蓝马甲', img:"pursuer_henbert.png"},
-   {n:'约拿·费尔顿',p:'观众',o:'贝克兰德剧院的配角演员',lk:'五官清秀而阴柔，笑容总像在琢磨什么', img:"pursuer_jonah.png"},
-   {n:'维托·克莱因',p:'猎人',o:'廷根猎人俱乐部的退役猎手',lk:'右眉一道旧疤，虎口全是老茧，说话粗声大气', img:"pursuer_vito.png"},
-   {n:'博杜安·怀特',p:'不眠者',o:'值夜者协会的外围线人',lk:'脸色常年苍白，走路没有声音，像一缕夜雾', img:"pursuer_beaumont.png"},
-   {n:'加百列·罗什',p:'学徒',o:'旅行商人，常走南方商道',lk:'皮肤黝黑，笑容爽朗，腰间挂着一串钥匙', img:"pursuer_gabriel.png"},
-   {n:'西奥多·汉密尔顿',p:'魔女',o:'秘密舞会上的神秘来客（男身）',lk:'长发披肩，五官妖冶得雌雄莫辨，左耳一枚银环', img:"pursuer_theodore.png"} ],
+   {n:'亨伯特·格雷',p:'占卜家',o:'廷根市立图书馆管理员',lk:'灰发梳得一丝不苟，眼下常年带着书卷气，爱穿褪色的深蓝马甲', img:"pursuer_henbert.jpg"},
+   {n:'约拿·费尔顿',p:'观众',o:'贝克兰德剧院的配角演员',lk:'五官清秀而阴柔，笑容总像在琢磨什么', img:"pursuer_jonah.jpg"},
+   {n:'维托·克莱因',p:'猎人',o:'廷根猎人俱乐部的退役猎手',lk:'右眉一道旧疤，虎口全是老茧，说话粗声大气', img:"pursuer_vito.jpg"},
+   {n:'博杜安·怀特',p:'不眠者',o:'值夜者协会的外围线人',lk:'脸色常年苍白，走路没有声音，像一缕夜雾', img:"pursuer_beaumont.jpg"},
+   {n:'加百列·罗什',p:'学徒',o:'旅行商人，常走南方商道',lk:'皮肤黝黑，笑容爽朗，腰间挂着一串钥匙', img:"pursuer_gabriel.jpg"},
+   {n:'西奥多·汉密尔顿',p:'魔女',o:'秘密舞会上的神秘来客（男身）',lk:'长发披肩，五官妖冶得雌雄莫辨，左耳一枚银环', img:"pursuer_theodore.jpg"} ],
   f:[
-   {n:'莉莉安·沃德',p:'占卜家',o:'廷根占卜家俱乐部的挂名占卜师',lk:'黑发过肩，眼睛像蒙着雾的宝石，总戴着一条星象吊坠', img:"pursuer_lilian.png"},
-   {n:'艾达·莫顿',p:'猎人',o:'民兵队的女猎手',lk:'短发利落，小麦色皮肤，手臂上缠着旧绷带', img:"pursuer_ada.png"},
-   {n:'克洛伊·弗罗斯特',p:'月亮',o:'药店女学徒（血族混血）',lk:'肤色极白，银色长发，阳光下微微眯眼', img:"pursuer_chloe.png"},
-   {n:'伊莎贝拉·诺顿',p:'不眠者',o:'陵园守夜人的女儿',lk:'黑发黑瞳，气质冷冽，像月光下的石碑', img:"pursuer_isabel.png"},
-   {n:'黛博拉·西恩',p:'魔女',o:'午夜酒吧的老板娘',lk:'红唇黑裙，一举一动都像在跳一支慢舞', img:"pursuer_deborah.png"},
-   {n:'罗莎琳·佩特',p:'收尸人',o:'太平间的记录员',lk:'常年戴一副黑手套，神情平静得像办过所有葬礼', img:"pursuer_rosaline.png"} ]},
+   {n:'莉莉安·沃德',p:'占卜家',o:'廷根占卜家俱乐部的挂名占卜师',lk:'黑发过肩，眼睛像蒙着雾的宝石，总戴着一条星象吊坠', img:"pursuer_lilian.jpg"},
+   {n:'艾达·莫顿',p:'猎人',o:'民兵队的女猎手',lk:'短发利落，小麦色皮肤，手臂上缠着旧绷带', img:"pursuer_ada.jpg"},
+   {n:'克洛伊·弗罗斯特',p:'月亮',o:'药店女学徒（血族混血）',lk:'肤色极白，银色长发，阳光下微微眯眼', img:"pursuer_chloe.jpg"},
+   {n:'伊莎贝拉·诺顿',p:'不眠者',o:'陵园守夜人的女儿',lk:'黑发黑瞳，气质冷冽，像月光下的石碑', img:"pursuer_isabel.jpg"},
+   {n:'黛博拉·西恩',p:'魔女',o:'午夜酒吧的老板娘',lk:'红唇黑裙，一举一动都像在跳一支慢舞', img:"pursuer_deborah.jpg"},
+   {n:'罗莎琳·佩特',p:'收尸人',o:'太平间的记录员',lk:'常年戴一副黑手套，神情平静得像办过所有葬礼', img:"pursuer_rosaline.jpg"} ]},
  8:{ m:[
-   {n:'艾略特·格兰特',p:'占卜家',o:'占卜家俱乐部资深成员',lk:'气质沉静，说话前总要先看你的眼睛', img:"pursuer_eliot.png"},
-   {n:'马库斯·韦恩',p:'偷盗者',o:'地下拍卖行的掮客',lk:'笑容机敏，手指修长，惯于在口袋里藏东西', img:"pursuer_marcus.png"},
-   {n:'雷纳德·沃尔夫',p:'猎人',o:'私人侦探事务所的调查员',lk:'络腮胡，烟斗不离手，眼神像鹰', img:"pursuer_renard.png"},
-   {n:'亚瑟·康诺利',p:'不眠者',o:'值夜者小队副队长',lk:'眉骨高耸，目光沉沉，黑袍下摆沾着露水', img:"pursuer_arthur.png"},
-   {n:'路易·杜兰德',p:'魔女',o:'上流舞会的常客（男身）',lk:'美得近乎危险，唇角常挂一抹似笑非笑', img:"pursuer_louis.png"} ],
+   {n:'艾略特·格兰特',p:'占卜家',o:'占卜家俱乐部资深成员',lk:'气质沉静，说话前总要先看你的眼睛', img:"pursuer_eliot.jpg"},
+   {n:'马库斯·韦恩',p:'偷盗者',o:'地下拍卖行的掮客',lk:'笑容机敏，手指修长，惯于在口袋里藏东西', img:"pursuer_marcus.jpg"},
+   {n:'雷纳德·沃尔夫',p:'猎人',o:'私人侦探事务所的调查员',lk:'络腮胡，烟斗不离手，眼神像鹰', img:"pursuer_renard.jpg"},
+   {n:'亚瑟·康诺利',p:'不眠者',o:'值夜者小队副队长',lk:'眉骨高耸，目光沉沉，黑袍下摆沾着露水', img:"pursuer_arthur.jpg"},
+   {n:'路易·杜兰德',p:'魔女',o:'上流舞会的常客（男身）',lk:'美得近乎危险，唇角常挂一抹似笑非笑', img:"pursuer_louis.jpg"} ],
   f:[
-   {n:'夏洛特·布莱克',p:'占卜家',o:'私人占卜屋主人',lk:'紫纱蒙眼，声音空灵，像来自另一个时代', img:"pursuer_charlotte.png"},
-   {n:'菲奥娜·梅里特',p:'月亮',o:'血族男爵的养女（混血）',lk:'银灰色长发，瞳孔在暗处微微泛红', img:"pursuer_fiona.png"},
-   {n:'阿黛尔·休',p:'偷盗者',o:'钟表行老板娘（黑市销赃人）',lk:'手指灵巧，笑起来眼睛弯成月牙，像只猫', img:"pursuer_adele.png"},
-   {n:'娜塔莉·温特',p:'不眠者',o:'守夜人协会的女执事',lk:'白发如雪，气质冷艳，目光澄澈', img:"pursuer_natalie.png"},
-   {n:'塞尔玛·安德森',p:'魔女',o:'香水工坊的女调香师',lk:'举手投足都带着暗香，迷人得让人不敢靠近', img:"pursuer_selma.png"} ]},
+   {n:'夏洛特·布莱克',p:'占卜家',o:'私人占卜屋主人',lk:'紫纱蒙眼，声音空灵，像来自另一个时代', img:"pursuer_charlotte.jpg"},
+   {n:'菲奥娜·梅里特',p:'月亮',o:'血族男爵的养女（混血）',lk:'银灰色长发，瞳孔在暗处微微泛红', img:"pursuer_fiona.jpg"},
+   {n:'阿黛尔·休',p:'偷盗者',o:'钟表行老板娘（黑市销赃人）',lk:'手指灵巧，笑起来眼睛弯成月牙，像只猫', img:"pursuer_adele.jpg"},
+   {n:'娜塔莉·温特',p:'不眠者',o:'守夜人协会的女执事',lk:'白发如雪，气质冷艳，目光澄澈', img:"pursuer_natalie.jpg"},
+   {n:'塞尔玛·安德森',p:'魔女',o:'香水工坊的女调香师',lk:'举手投足都带着暗香，迷人得让人不敢靠近', img:"pursuer_selma.jpg"} ]},
  7:{ m:[
-   {n:'格雷戈里·福斯特',p:'占卜家',o:'神秘学书店店主',lk:'银边眼镜，谈吐温和，书架后的世界比前台更深', img:"pursuer_gregory.png"},
-   {n:'洛伦佐·卡特',p:'偷盗者',o:'港口码头的搬运工头目',lk:'皮肤粗糙，眼神精明，手上的老茧藏着秘密', img:"pursuer_lorenzo.png"},
-   {n:'哈里森·伍德',p:'猎人',o:'退役军人，开了一家靶场',lk:'体格魁梧，左臂有旧伤，却仍能单手举起猎枪', img:"pursuer_harrison.png"},
-   {n:'欧文·斯特林',p:'不眠者',o:'值夜者协会联络员',lk:'面无表情，像块石头，但关键时刻靠得住', img:"pursuer_owen.png"},
-   {n:'雨果·莫里森',p:'观众',o:'深夜剧院的影子演员',lk:'身形修长，面具之下永远看不清他的神情', img:"pursuer_hugo.png"} ],
+   {n:'格雷戈里·福斯特',p:'占卜家',o:'神秘学书店店主',lk:'银边眼镜，谈吐温和，书架后的世界比前台更深', img:"pursuer_gregory.jpg"},
+   {n:'洛伦佐·卡特',p:'偷盗者',o:'港口码头的搬运工头目',lk:'皮肤粗糙，眼神精明，手上的老茧藏着秘密', img:"pursuer_lorenzo.jpg"},
+   {n:'哈里森·伍德',p:'猎人',o:'退役军人，开了一家靶场',lk:'体格魁梧，左臂有旧伤，却仍能单手举起猎枪', img:"pursuer_harrison.jpg"},
+   {n:'欧文·斯特林',p:'不眠者',o:'值夜者协会联络员',lk:'面无表情，像块石头，但关键时刻靠得住', img:"pursuer_owen.jpg"},
+   {n:'雨果·莫里森',p:'观众',o:'深夜剧院的影子演员',lk:'身形修长，面具之下永远看不清他的神情', img:"pursuer_hugo.jpg"} ],
   f:[
-   {n:'艾莉森·佩恩',p:'占卜家',o:'占卜协会的资深顾问',lk:'银发挽髻，眼里常有洞察一切的笑意', img:"pursuer_allison.png"},
-   {n:'凯瑟琳·罗素',p:'猎人',o:'佣兵团的队长',lk:'短发凌厉，脸上有一道旧疤，笑起来却很好看', img:"pursuer_katherine.png"},
-   {n:'莫妮卡·范',p:'月亮',o:'血族商会的代表',lk:'肤白如瓷，浅金色长发，优雅得像一幅油画', img:"pursuer_monica.png"},
-   {n:'米拉·索恩',p:'不眠者',o:'夜巡队的女队长',lk:'黑发扎成高马尾，眼神像夜空一样深', img:"pursuer_mira.png"},
-   {n:'佩内洛普·格雷',p:'魔女',o:'香水店的老板娘',lk:'气质慵懒，眼波流转间勾魂摄魄', img:"pursuer_penelope.png"} ]},
+   {n:'艾莉森·佩恩',p:'占卜家',o:'占卜协会的资深顾问',lk:'银发挽髻，眼里常有洞察一切的笑意', img:"pursuer_allison.jpg"},
+   {n:'凯瑟琳·罗素',p:'猎人',o:'佣兵团的队长',lk:'短发凌厉，脸上有一道旧疤，笑起来却很好看', img:"pursuer_katherine.jpg"},
+   {n:'莫妮卡·范',p:'月亮',o:'血族商会的代表',lk:'肤白如瓷，浅金色长发，优雅得像一幅油画', img:"pursuer_monica.jpg"},
+   {n:'米拉·索恩',p:'不眠者',o:'夜巡队的女队长',lk:'黑发扎成高马尾，眼神像夜空一样深', img:"pursuer_mira.jpg"},
+   {n:'佩内洛普·格雷',p:'魔女',o:'香水店的老板娘',lk:'气质慵懒，眼波流转间勾魂摄魄', img:"pursuer_penelope.jpg"} ]},
  6:{ m:[
-   {n:'西里尔·兰开斯特',p:'占卜家',o:'王室占卜顾问的弟子',lk:'气质矜贵，指尖常捻着一枚银币', img:"pursuer_cyril.png"},
-   {n:'本尼迪克特·霍尔',p:'偷盗者',o:'古董商的合伙人',lk:'笑容温和，手腕上戴着一串来历不明的旧手链', img:"pursuer_benedict.png"},
-   {n:'加斯帕·诺尔',p:'猎人',o:'王都地下拳场的幕后老板',lk:'体型精悍，眼神像淬过火', img:"pursuer_gaspar.png"},
-   {n:'伊格纳茨·瓦恩',p:'学徒',o:'远洋商会的船长',lk:'海风刻在脸上，手掌粗糙，眼神明亮', img:"pursuer_ignaz.png"},
-   {n:'埃利亚斯·蒙特',p:'观众',o:'上流沙龙的神秘常客',lk:'举手投足皆是精心伪装的优雅，无人见过他真实面目', img:"pursuer_elias.png"} ],
+   {n:'西里尔·兰开斯特',p:'占卜家',o:'王室占卜顾问的弟子',lk:'气质矜贵，指尖常捻着一枚银币', img:"pursuer_cyril.jpg"},
+   {n:'本尼迪克特·霍尔',p:'偷盗者',o:'古董商的合伙人',lk:'笑容温和，手腕上戴着一串来历不明的旧手链', img:"pursuer_benedict.jpg"},
+   {n:'加斯帕·诺尔',p:'猎人',o:'王都地下拳场的幕后老板',lk:'体型精悍，眼神像淬过火', img:"pursuer_gaspar.jpg"},
+   {n:'伊格纳茨·瓦恩',p:'学徒',o:'远洋商会的船长',lk:'海风刻在脸上，手掌粗糙，眼神明亮', img:"pursuer_ignaz.jpg"},
+   {n:'埃利亚斯·蒙特',p:'观众',o:'上流沙龙的神秘常客',lk:'举手投足皆是精心伪装的优雅，无人见过他真实面目', img:"pursuer_elias.jpg"} ],
   f:[
-   {n:'伊芙琳·卡特',p:'占卜家',o:'占卜协会的荣誉顾问',lk:'长发如墨，眼神深不见底，神秘而优雅', img:"pursuer_eve.png"},
-   {n:'安吉拉·佩特罗',p:'猎人',o:'雇佣兵团的团长',lk:'小麦色皮肤，眼神锐利，像一把出鞘的刀', img:"pursuer_angela.png"},
-   {n:'艾琳娜·范德比尔特',p:'月亮',o:'血族贵族之女（混血）',lk:'白金色长发，气质高贵，眼瞳如血珀', img:"pursuer_elena_v.png"},
-   {n:'多萝西·韦斯特',p:'偷盗者',o:'珠宝商行的少东家（黑市眼线）',lk:'笑容甜美，手指纤细，是珠宝也是陷阱', img:"pursuer_dorothy.png"},
-   {n:'艾芙琳·杜波依斯',p:'魔女',o:'上流社会的沙龙女主人',lk:'举手投足皆风情，是整个王都的秘密情人', img:"pursuer_evelyn.png"} ]},
+   {n:'伊芙琳·卡特',p:'占卜家',o:'占卜协会的荣誉顾问',lk:'长发如墨，眼神深不见底，神秘而优雅', img:"pursuer_eve.jpg"},
+   {n:'安吉拉·佩特罗',p:'猎人',o:'雇佣兵团的团长',lk:'小麦色皮肤，眼神锐利，像一把出鞘的刀', img:"pursuer_angela.jpg"},
+   {n:'艾琳娜·范德比尔特',p:'月亮',o:'血族贵族之女（混血）',lk:'白金色长发，气质高贵，眼瞳如血珀', img:"pursuer_elena_v.jpg"},
+   {n:'多萝西·韦斯特',p:'偷盗者',o:'珠宝商行的少东家（黑市眼线）',lk:'笑容甜美，手指纤细，是珠宝也是陷阱', img:"pursuer_dorothy.jpg"},
+   {n:'艾芙琳·杜波依斯',p:'魔女',o:'上流社会的沙龙女主人',lk:'举手投足皆风情，是整个王都的秘密情人', img:"pursuer_evelyn.jpg"} ]},
  5:{ m:[
-   {n:'卢西安·德·蒙特',p:'占卜家',o:'神秘组织的观察员',lk:'气质疏离，像站在世界之外看着一切', img:"pursuer_lucian.png"},
-   {n:'阿尔芒·贝当',p:'偷盗者',o:'跨国销赃网络的节点',lk:'永远带着礼貌的笑，像一只优雅的狐狸', img:"pursuer_armand.png"},
-   {n:'雷奥·斯特朗',p:'猎人',o:'退役军人组织的头目',lk:'体格如铁塔，沉默寡言，眼神如刀', img:"pursuer_rao.png"},
-   {n:'卡斯帕·伦勃朗',p:'学徒',o:'空间研究学者',lk:'戴着单片眼镜，口袋里永远有奇怪的门钥匙', img:"pursuer_caspar.png"},
-   {n:'杜兰·科尔',p:'阅读者',o:'黑街深处的机关师',lk:'总是摆弄着精密齿轮，眼神比机簧更冷', img:"pursuer_duran.png"} ],
+   {n:'卢西安·德·蒙特',p:'占卜家',o:'神秘组织的观察员',lk:'气质疏离，像站在世界之外看着一切', img:"pursuer_lucian.jpg"},
+   {n:'阿尔芒·贝当',p:'偷盗者',o:'跨国销赃网络的节点',lk:'永远带着礼貌的笑，像一只优雅的狐狸', img:"pursuer_armand.jpg"},
+   {n:'雷奥·斯特朗',p:'猎人',o:'退役军人组织的头目',lk:'体格如铁塔，沉默寡言，眼神如刀', img:"pursuer_rao.jpg"},
+   {n:'卡斯帕·伦勃朗',p:'学徒',o:'空间研究学者',lk:'戴着单片眼镜，口袋里永远有奇怪的门钥匙', img:"pursuer_caspar.jpg"},
+   {n:'杜兰·科尔',p:'阅读者',o:'黑街深处的机关师',lk:'总是摆弄着精密齿轮，眼神比机簧更冷', img:"pursuer_duran.jpg"} ],
   f:[
-   {n:'薇奥莱特·兰道尔',p:'占卜家',o:'王室占卜师',lk:'气质超然，仿佛能看见时间的褶皱', img:"pursuer_violet.png"},
-   {n:'伊莎多拉·布莱克伍德',p:'猎人',o:'佣兵公会的传奇团长',lk:'黑发黑瞳，伤痕是她的勋章', img:"pursuer_isadora.png"},
-   {n:'奥菲莉亚·卢米埃',p:'月亮',o:'血族伯爵之女',lk:'银发红瞳，举手投足皆是古老贵族的优雅', img:"pursuer_ophelia.png"},
-   {n:'妮可·弗兰克林',p:'偷盗者',o:'黑市教母',lk:'笑容甜美，却让整个黑市闻风丧胆', img:"pursuer_nicole.png"},
-   {n:'玛德琳·杜瓦尔',p:'魔女',o:'各国贵族争相结交的绝色',lk:'美得惊心动魄，一颦一笑皆是灾难', img:"pursuer_madeleine.png"} ]},
+   {n:'薇奥莱特·兰道尔',p:'占卜家',o:'王室占卜师',lk:'气质超然，仿佛能看见时间的褶皱', img:"pursuer_violet.jpg"},
+   {n:'伊莎多拉·布莱克伍德',p:'猎人',o:'佣兵公会的传奇团长',lk:'黑发黑瞳，伤痕是她的勋章', img:"pursuer_isadora.jpg"},
+   {n:'奥菲莉亚·卢米埃',p:'月亮',o:'血族伯爵之女',lk:'银发红瞳，举手投足皆是古老贵族的优雅', img:"pursuer_ophelia.jpg"},
+   {n:'妮可·弗兰克林',p:'偷盗者',o:'黑市教母',lk:'笑容甜美，却让整个黑市闻风丧胆', img:"pursuer_nicole.jpg"},
+   {n:'玛德琳·杜瓦尔',p:'魔女',o:'各国贵族争相结交的绝色',lk:'美得惊心动魄，一颦一笑皆是灾难', img:"pursuer_madeleine.jpg"} ]},
  4:{ m:[
-   {n:'珀西瓦尔·格罗斯',p:'占卜家',o:'皇家气象观测站的夜间值班人',lk:'周身气质缥缈，像随时会化入灰雾', img:"pursuer_percival.png"},
-   {n:'巴斯蒂安·洛特',p:'观众',o:'王都的影子——幕后操盘手',lk:'眼神温润如水，却无人敢直视', img:"pursuer_bastien.png"},
-   {n:'康斯坦丁·冯·奥尔特',p:'猎人',o:'猎人工会总会长',lk:'雄狮般的气度，眼神燃烧着战意', img:"pursuer_constantine.png"},
-   {n:'亚历山大·佩莱格里尼',p:'月亮',o:'血族亲王之子',lk:'苍白俊美，气质华贵，眼底有血色的光', img:"pursuer_alexander.png"} ],
+   {n:'珀西瓦尔·格罗斯',p:'占卜家',o:'皇家气象观测站的夜间值班人',lk:'周身气质缥缈，像随时会化入灰雾', img:"pursuer_percival.jpg"},
+   {n:'巴斯蒂安·洛特',p:'观众',o:'王都的影子——幕后操盘手',lk:'眼神温润如水，却无人敢直视', img:"pursuer_bastien.jpg"},
+   {n:'康斯坦丁·冯·奥尔特',p:'猎人',o:'猎人工会总会长',lk:'雄狮般的气度，眼神燃烧着战意', img:"pursuer_constantine.jpg"},
+   {n:'亚历山大·佩莱格里尼',p:'月亮',o:'血族亲王之子',lk:'苍白俊美，气质华贵，眼底有血色的光', img:"pursuer_alexander.jpg"} ],
   f:[
-   {n:'埃莉诺·兰开斯特',p:'占卜家',o:'命运学派的守护者',lk:'气质空灵，仿佛存在于现实与梦境之间', img:"pursuer_eleanor.png"},
-   {n:'维罗妮卡·斯特林',p:'观众',o:'王后顾问团的首席',lk:'优雅如天鹅，眼中藏着整座王都的秘密', img:"pursuer_veronica.png"},
-   {n:'卡特琳娜·伊文',p:'猎人',o:'佣兵公会的总指挥',lk:'英姿飒爽，眉宇间尽是不羁的战意', img:"pursuer_catherine.png"},
-   {n:'伊莲娜·冯·萨尔',p:'月亮',o:'血族女公爵',lk:'银发如月，雍容华贵，眼瞳幽深如暗夜', img:"pursuer_elena_iv.png"} ]},
+   {n:'埃莉诺·兰开斯特',p:'占卜家',o:'命运学派的守护者',lk:'气质空灵，仿佛存在于现实与梦境之间', img:"pursuer_eleanor.jpg"},
+   {n:'维罗妮卡·斯特林',p:'观众',o:'王后顾问团的首席',lk:'优雅如天鹅，眼中藏着整座王都的秘密', img:"pursuer_veronica.jpg"},
+   {n:'卡特琳娜·伊文',p:'猎人',o:'佣兵公会的总指挥',lk:'英姿飒爽，眉宇间尽是不羁的战意', img:"pursuer_catherine.jpg"},
+   {n:'伊莲娜·冯·萨尔',p:'月亮',o:'血族女公爵',lk:'银发如月，雍容华贵，眼瞳幽深如暗夜', img:"pursuer_elena_iv.jpg"} ]},
  3:{ m:[
-   {n:'洛伦斯·德·昆西',p:'占卜家',o:'占卜家学派的守护天使',lk:'气息超然，目光仿佛穿过时间', img:"pursuer_lorenz.png"},
-   {n:'赛拉斯·奥古斯都',p:'观众',o:'空想家的代行者',lk:'身周光影明灭，无人记得清他的脸', img:"pursuer_silas.png"},
-   {n:'阿纳托利·沃尔科夫',p:'猎人',o:'红祭司教会的战争主教',lk:'身披火红长袍，眼神如熔岩', img:"pursuer_anatoli.png"} ],
+   {n:'洛伦斯·德·昆西',p:'占卜家',o:'占卜家学派的守护天使',lk:'气息超然，目光仿佛穿过时间', img:"pursuer_lorenz.jpg"},
+   {n:'赛拉斯·奥古斯都',p:'观众',o:'空想家的代行者',lk:'身周光影明灭，无人记得清他的脸', img:"pursuer_silas.jpg"},
+   {n:'阿纳托利·沃尔科夫',p:'猎人',o:'红祭司教会的战争主教',lk:'身披火红长袍，眼神如熔岩', img:"pursuer_anatoli.jpg"} ],
   f:[
-   {n:'艾拉·范德林德',p:'占卜家',o:'命运学派的守护天使',lk:'身周环绕着淡淡星辉，面容模糊而圣洁', img:"pursuer_aila.png"},
-   {n:'塞西尔·诺曼',p:'观众',o:'空想家教会的高阶圣女',lk:'气质如梦似幻，微笑仿佛能改写记忆', img:"pursuer_cecile.png"},
-   {n:'瓦伦蒂娜·罗曼诺娃',p:'猎人',o:'红祭司教会的女武神',lk:'火红长发如旗，周身缭绕着战争的气息', img:"pursuer_valentina.png"} ]},
+   {n:'艾拉·范德林德',p:'占卜家',o:'命运学派的守护天使',lk:'身周环绕着淡淡星辉，面容模糊而圣洁', img:"pursuer_aila.jpg"},
+   {n:'塞西尔·诺曼',p:'观众',o:'空想家教会的高阶圣女',lk:'气质如梦似幻，微笑仿佛能改写记忆', img:"pursuer_cecile.jpg"},
+   {n:'瓦伦蒂娜·罗曼诺娃',p:'猎人',o:'红祭司教会的女武神',lk:'火红长发如旗，周身缭绕着战争的气息', img:"pursuer_valentina.jpg"} ]},
  2:{ m:[
-   {n:'梅尔基奥·范恩',p:'占卜家',o:'愚者教会座下的半神',lk:'周身笼罩着灰雾的轮廓，无人能看清面容', img:"pursuer_melchior.png"},
-   {n:'奥古斯丁·克莱恩特',p:'观众',o:'空想家教会的半神',lk:'存在感若有若无，像一场醒着的梦', img:"pursuer_augustine.png"},
-   {n:'巴托洛缪·埃克特',p:'猎人',o:'红祭司教会的半神',lk:'气势如渊似海，目光所及皆是战场', img:"pursuer_bartholomew.png"} ],
+   {n:'梅尔基奥·范恩',p:'占卜家',o:'愚者教会座下的半神',lk:'周身笼罩着灰雾的轮廓，无人能看清面容', img:"pursuer_melchior.jpg"},
+   {n:'奥古斯丁·克莱恩特',p:'观众',o:'空想家教会的半神',lk:'存在感若有若无，像一场醒着的梦', img:"pursuer_augustine.jpg"},
+   {n:'巴托洛缪·埃克特',p:'猎人',o:'红祭司教会的半神',lk:'气势如渊似海，目光所及皆是战场', img:"pursuer_bartholomew.jpg"} ],
   f:[
-   {n:'伊莎贝拉·德·卢瓦尔',p:'占卜家',o:'愚者教会的女半神',lk:'灰雾缭绕，声音空灵，面容不可辨识', img:"pursuer_isabella_d.png"},
-   {n:'阿德莱德·冯·霍亨',p:'观众',o:'空想家教会的女半神',lk:'如梦如幻，微微一笑便让世界颠倒', img:"pursuer_adeleide.png"},
-   {n:'弗蕾雅·斯通',p:'猎人',o:'红祭司教会的女半神',lk:'战意如焰，眉目间是燃烧的星辰', img:"pursuer_freya.png"} ]}
+   {n:'伊莎贝拉·德·卢瓦尔',p:'占卜家',o:'愚者教会的女半神',lk:'灰雾缭绕，声音空灵，面容不可辨识', img:"pursuer_isabella_d.jpg"},
+   {n:'阿德莱德·冯·霍亨',p:'观众',o:'空想家教会的女半神',lk:'如梦如幻，微微一笑便让世界颠倒', img:"pursuer_adeleide.jpg"},
+   {n:'弗蕾雅·斯通',p:'猎人',o:'红祭司教会的女半神',lk:'战意如焰，眉目间是燃烧的星辰', img:"pursuer_freya.jpg"} ]}
 };/* 追求者暗转判定：仅 12-18 岁（teen）阶段，美貌 ≥10，且该档位尚未触发 */
 function pursuerEncounter(){
   const s = state;
@@ -6331,35 +6338,35 @@ const WANTED_EVENTS = [
 
 /* 海贼风悬赏画像（第一批已生成） */
 const BOUNTY_IMGS = {
-  'wt_b1':'images/bounty_zisha.png',
-  'wt_k1':'images/bounty_kapin.png',
-  'wt_k2':'images/bounty_xueshang.png',
-  'wt_k3':'images/bounty_meigui.png',
-  'wt_k4':'images/bounty_jie.png',
-  'wt_k5':'images/bounty_jibing.png',
-  'wt_k6':'images/bounty_diyu.png',
-  'wt_r2':'images/bounty_heifan.png',
-  'wt_f1':'images/bounty_jiguang.png',
-  'wt_b5':'images/bounty_touxin.png',
-  'wt_b6':'images/bounty_xiunu.png',
-  'wt_b7':'images/bounty_taoguan.png',
-  'wt_b4':'images/bounty_honghuzi.png',
-  'wt_k7':'images/bounty_jimu.png',
-  'wt_k8':'images/bounty_shuwang.png',
-  'wt_k9':'images/bounty_tangmi.png',
-  'wt_k10':'images/bounty_suanya.png',
-  'wt_r1':'images/bounty_suolun.png',
-  'wt_r5':'images/bounty_toushuzei.png',
-  'wt_r6':'images/bounty_duantuan.png',
-  'wt_r7':'images/bounty_xunzhang.png',
-  'wt_r3':'images/bounty_yinfa.png',
-  'wt_r4':'images/bounty_zipao.png',
-  'wt_f4':'images/bounty_kuangxin.png',
-  'wt_f5':'images/bounty_liulang.png',
-  'wt_f6':'images/bounty_jianxi.png',
-  'wt_f7':'images/bounty_yegou.png',
-  'wt_f2':'images/bounty_rose.png',
-  'wt_f3':'images/bounty_emoshi.png',
+  'wt_b1':'images/bounty_zisha.jpg',
+  'wt_k1':'images/bounty_kapin.jpg',
+  'wt_k2':'images/bounty_xueshang.jpg',
+  'wt_k3':'images/bounty_meigui.jpg',
+  'wt_k4':'images/bounty_jie.jpg',
+  'wt_k5':'images/bounty_jibing.jpg',
+  'wt_k6':'images/bounty_diyu.jpg',
+  'wt_r2':'images/bounty_heifan.jpg',
+  'wt_f1':'images/bounty_jiguang.jpg',
+  'wt_b5':'images/bounty_touxin.jpg',
+  'wt_b6':'images/bounty_xiunu.jpg',
+  'wt_b7':'images/bounty_taoguan.jpg',
+  'wt_b4':'images/bounty_honghuzi.jpg',
+  'wt_k7':'images/bounty_jimu.jpg',
+  'wt_k8':'images/bounty_shuwang.jpg',
+  'wt_k9':'images/bounty_tangmi.jpg',
+  'wt_k10':'images/bounty_suanya.jpg',
+  'wt_r1':'images/bounty_suolun.jpg',
+  'wt_r5':'images/bounty_toushuzei.jpg',
+  'wt_r6':'images/bounty_duantuan.jpg',
+  'wt_r7':'images/bounty_xunzhang.jpg',
+  'wt_r3':'images/bounty_yinfa.jpg',
+  'wt_r4':'images/bounty_zipao.jpg',
+  'wt_f4':'images/bounty_kuangxin.jpg',
+  'wt_f5':'images/bounty_liulang.jpg',
+  'wt_f6':'images/bounty_jianxi.jpg',
+  'wt_f7':'images/bounty_yegou.jpg',
+  'wt_f2':'images/bounty_rose.jpg',
+  'wt_f3':'images/bounty_emoshi.jpg',
 };
 
 /* ===== 教派（18 岁后长线加入；不同教派功绩商店刷不同物品） ===== */
@@ -7053,7 +7060,7 @@ function showBattleOutcome(msg){
     s._justDied = false;
     stopMusic();
     showEnding({
-      img: 'images/death_cemetery.png',
+      img: 'images/death_cemetery.jpg',
       title: '你死了',
       text: esc(msg),
       btnText: '重新开始',
@@ -8204,8 +8211,11 @@ function updateAgeLine(){
       });
     }
   }
-  let raf = 0;
+  let raf = 0, lastT = 0, hidden = document.hidden;
   function draw(t){
+    /* 锁帧 ~12fps：星星闪烁无需 60fps，显著降低低端机开销 */
+    if (t - lastT < 80){ raf = requestAnimationFrame(draw); return; }
+    lastT = t;
     ctx.clearRect(0, 0, W, H);
     for (const s of stars){
       const a = s.base * (0.5 + 0.5 * Math.sin(t * 0.001 * s.speed + s.phase));
@@ -8217,10 +8227,16 @@ function updateAgeLine(){
     }
     raf = requestAnimationFrame(draw);
   }
+  function loop(){ raf = requestAnimationFrame(draw); }
+  function stop(){ if (raf){ cancelAnimationFrame(raf); raf = 0; } }
+  document.addEventListener('visibilitychange', function(){
+    hidden = document.hidden;
+    if (hidden) stop(); else loop();
+  });
   resize();
   window.addEventListener('resize', resize);
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (!reduce.matches) raf = requestAnimationFrame(draw);
+  if (!reduce.matches && !hidden) raf = requestAnimationFrame(draw);
 })();
 
 /* ===== 事件绑定 ===== */
@@ -8843,7 +8859,7 @@ function wonderStart(w){
   s.wonderRun = { id: w.id, stage: 1, line: '', flags: {}, enemy: null };
   $('wonderModal').classList.remove('open');
   const box = wonderShowMain(w.name);
-  box.innerHTML = '<img class="wonder-bg" src="images/wonder_' + w.id.toLowerCase() + '.png" alt="' + esc(w.name) + '" onerror="this.style.display=\'none\'">' +
+  box.innerHTML = '<img class="wonder-bg" src="images/wonder_' + w.id.toLowerCase() + '.jpg" alt="' + esc(w.name) + '" onerror="this.style.display=\'none\'">' +
     '<div class="r-item"><b>' + esc(w.name) + '</b> · ' + seqLevelLabel(w.seq) + '<br>' +
     esc(w.env) + '<br>' + esc(w.lore) + '<br>威胁：' + esc(w.monster) + '<br>基础奖励：' + esc(w.baseReward) + '</div>' +
     '<div style="text-align:center;margin-top:14px"><button class="wonder-enter-btn" id="wonderProceed">步入奇境</button></div>';
@@ -9398,7 +9414,7 @@ function showMadEnding(path){
   el.className = 'mad-overlay';
   el.innerHTML =
     '<div class="mad-card">' +
-      '<img src="images/mad_' + path + '.png" alt="" onerror="this.style.display=\'none\'">' +
+      '<img src="images/mad_' + path + '.jpg" alt="" onerror="this.style.display=\'none\'">' +
       '<div class="mad-kicker">命运终结 · 失控</div>' +
       '<h2>你疯了</h2>' +
       '<p>' + (MAD_TEXT[path] || '你喝下了不属于你的魔药，理智彻底崩解。') + '</p>' +
@@ -9469,8 +9485,8 @@ renderModal();
 </script>
 
 <!-- 背景音乐：月下回廊（全局循环，连续播放不打断）/ 黑潮（战斗触发，播完自动切回背景乐） -->
-<audio id="bgmAudio" src="audio/bgm_yuexia.wav" loop preload="none"></audio>
-<audio id="battleAudio" src="audio/battle_heichao.wav" preload="none"></audio>
+<audio id="bgmAudio" src="audio/bgm_yuexia.mp3" loop preload="none"></audio>
+<audio id="battleAudio" src="audio/battle_heichao.mp3" preload="none"></audio>
 <script>
 /* 战斗曲播完 → 自动无缝切回背景乐（若背景乐原本在播） */
 (function(){
